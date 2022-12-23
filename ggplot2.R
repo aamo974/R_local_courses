@@ -1,6 +1,11 @@
 library(dslabs)
 library(tidyverse)
+library(ggplot2)
+library(ggthemes)
 data(murders)
+ds_theme_set()
+
+
 
 # p <- ggplot(data = murders)
 # p + geom_point(aes(population/10^6,total)) +
@@ -32,5 +37,7 @@ r <- murders %>% summarize(rate = sum(total) / sum(population) * 10^6) %>% pull(
 
 p <- p + geom_abline(intercept = log10(r), lty = 2, color = "darkgrey") +
   scale_color_discrete(name = "Region")
+
+p <- p + theme_economist()
 
 print(p)
