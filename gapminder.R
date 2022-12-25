@@ -11,7 +11,12 @@ head(gapminder)
 #   filter(year == 2015 & country %in% c("Sri Lanka", "Turkey")) %>% 
 #   select(country, infant_mortality)
 
-filter(gapminder, year == 1962) %>%
+years <- c(1962,1980,1990,2000,2012)
+continents <- c("Europe", "Asia")
+
+filter(gapminder, year %in% years && continent %in% continents) %>%
   ggplot(aes(fertility, life_expectancy, color = continent)) +
-  geom_point()
+  geom_point() +
+  facet_wrap(~year)
+
 
