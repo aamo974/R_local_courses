@@ -5,7 +5,6 @@ library(ggthemes)
 ds_theme_set()
 data(gapminder)
 
-head(gapminder)
 
 # gapminder %>%
 #   filter(year == 2015 & country %in% c("Sri Lanka", "Turkey")) %>% 
@@ -34,12 +33,21 @@ head(gapminder)
 #   geom_text(data = labels, aes(x,y,label=country), size = 5) +
 #   theme(legend.position="none")
 
-gapminder <- gapminder %>%
-  mutate(dollars_per_day = gdp/population/365)
+ gapminder <- gapminder %>%
+   mutate(dollars_per_day = gdp/population/365)
+# 
+ past_year <- 1970
+ 
+# gapminder %>%
+#   filter(year == past_year & !is.na(gdp)) %>%
+#   ggplot(aes(log2(dollars_per_day))) +
+#   geom_histogram(binwidth = 1, col = "blue")
 
-past_year <- 1970
-gapminder %>%
+p <- gapminder %>%
   filter(year == past_year & !is.na(gdp)) %>%
-  ggplot(aes(log2(dollars_per_day))) +
-  geom_histogram(binwidth = 1, col = "blue")
+  mutate(region = reorder(region, dollars_per_day, FUN = median)) %>%
+  ggplot(aes(region,dollars_per_day, fill = continent)) +
+  geom_boxplot() +
+  theme(axis.text.x = element.text(angle = 90, hjust = 1)) +
+  xlab("")
 
