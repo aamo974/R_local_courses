@@ -1,7 +1,12 @@
 library(dplyr)
+library(ggplot2)
 library(dslabs)
 data(gapminder)
 
+# d <- gapminder %>% 
+#   filter(year %in% seq(1960,2010) & country == "Cambodia") %>% 
+#   select(life_expectancy,year) 
+# 
 
-df <- gapminder %>%
-  select(continent == "Africa" & year == 2012 & fertility <= 3)
+daydollars <- gapminder$gdp/gapminder$population/365
+
