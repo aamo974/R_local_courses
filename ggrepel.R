@@ -24,9 +24,10 @@
   
   data(heights)
   
-  # p <- heights %>% 
-  #   filter(sex == "Male") %>% 
-  #   ggplot(aes(x = height))
+  p <- heights %>%
+    group_by(sex) %>%
+    # filter(sex == "Male") %>%
+    ggplot(aes(x = height))
   
   #HISTOGRAM 
   # p <- p + geom_histogram(binwidth = 1, fill = "blue", col = "black") +
@@ -34,14 +35,14 @@
   #   ggtitle("Histogram")
   
   #DENSITY 
-  # p <- p + geom_density(fill="blue")
+  p <- p + geom_density(fill="blue", alpha = 0.2)
   
   #MULTI HISTOGRAM
-  p <- heights %>% filter(sex == "Male") %>% ggplot(aes(x = height))
-  p1 <- p + geom_histogram(binwidth = 1, fill = "blue", col = "black")
-  p2 <- p + geom_histogram(binwidth = 2, fill = "blue", col = "black")
-  p3 <- p + geom_histogram(binwidth = 3, fill = "blue", col = "black")
+  # p <- heights %>% filter(sex == "Male") %>% ggplot(aes(x = height))
+  # p1 <- p + geom_histogram(binwidth = 1, fill = "blue", col = "black")
+  # p2 <- p + geom_histogram(binwidth = 2, fill = "blue", col = "black")
+  # p3 <- p + geom_histogram(binwidth = 3, fill = "blue", col = "black")
   
   # arrange plots next to each other in 1 row, 3 columns
-  grid.arrange(p1, p2, p3, ncol = 3)
+  # grid.arrange(p1, p2, p3, ncol = 3)
   print(p)
