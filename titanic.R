@@ -44,9 +44,29 @@ dat <- titanic %>%
 #   geom_density(alpha=0.2) 
 # 
 
+# 
+# titanic %>%
+#   filter(Fare != 0 & !is.na(Fare)) %>%
+#   ggplot(aes(Survived, Fare, color = Survived)) +
+#   geom_boxplot() +
+#   # theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+#   geom_point() +
+#   geom_jitter(width = 0.1, alpha = 0.2) +
+#   scale_y_continuous(trans = "log2")
+# 
+# titanic %>%
+#   filter(!is.na(Pclass)) %>%
+#   ggplot(aes(Pclass, fill = Survived)) +
+#   geom_bar(position = position_dodge()) + 
+#   facet_grid(.~Pclass)
+
+
 
 titanic %>%
-  filter(Fare == 0 & !is.na(Fare)) %>%
-  group_by(Survived) %>%
-  ggplot(aes(Fare, color = Survived)) +
-  geom_boxplot()
+  filter(!is.na(Age) & !is.na(Sex) & !is.na(Survived)) %>%
+  ggplot(aes(Age, y = ..count.., fill = Survived)) +
+  geom_density(alpha = 0.2) +
+  facet_grid(Pclass ~ Sex)
+
+
+
