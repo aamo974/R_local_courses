@@ -8,5 +8,8 @@ data(gapminder)
 #   select(life_expectancy,year) 
 # 
 
-daydollars <- gapminder$gdp/gapminder$population/365
+mutate(gapminder,"dollars_per_day",gdp/population/365)
+
+
+
 
