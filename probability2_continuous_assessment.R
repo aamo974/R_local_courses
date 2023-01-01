@@ -16,6 +16,4 @@ highestIQ <- replicate(B, {
 })
 
 # Make a histogram of the highest IQ scores.
-highestIQ %>%
-  ggplot(aes(highestIQ)) +
-  geom_histogram()
+hist(highestIQ)
