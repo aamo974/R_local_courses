@@ -17,4 +17,18 @@ d_hat <- polls %>%
 
 p_hat <- (d_hat + 1) /2
 moe <- 1.96 * 2 * sqrt(p_hat * (1 - p_hat)/sum(polls$samplesize))
-moe
+
+one_poll_per_polster <- polls %>%
+  group_by(pollster) %>%
+  filter(enddate == max(enddate)) %>%
+  ungroup()
+
+one_poll_per_polster %>%
+  ggplot(aes(spread)) +
+  geom_histogram(binwidth = 0.01)
+
+results <- one_poll_per_polster %>%
+  summarize(avg = mean(spread), se = sd(spread)/sqrt(length(spread))) %>%
+  mutate(start = avg - 1.96*se, end = avg + 1.96*se)
+
+round(results*100,1)
